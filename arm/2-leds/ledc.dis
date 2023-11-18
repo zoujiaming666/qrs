@@ -1,0 +1,112 @@
+
+ledc.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+87800000 <_start>:
+87800000:	e10f0000 	mrs	r0, CPSR
+87800004:	e3c0001f 	bic	r0, r0, #31
+87800008:	e3800013 	orr	r0, r0, #19
+8780000c:	e129f000 	msr	CPSR_fc, r0
+87800010:	e3a0d602 	mov	sp, #2097152	; 0x200000
+87800014:	ea00002b 	b	878000c8 <__main_from_arm>
+
+87800018 <clk_enable>:
+87800018:	b480      	push	{r7}
+8780001a:	af00      	add	r7, sp, #0
+8780001c:	f244 036c 	movw	r3, #16492	; 0x406c
+87800020:	f2c0 230c 	movt	r3, #524	; 0x20c
+87800024:	f04f 32ff 	mov.w	r2, #4294967295	; 0xffffffff
+87800028:	601a      	str	r2, [r3, #0]
+8780002a:	f244 0370 	movw	r3, #16496	; 0x4070
+8780002e:	f2c0 230c 	movt	r3, #524	; 0x20c
+87800032:	f04f 32ff 	mov.w	r2, #4294967295	; 0xffffffff
+87800036:	601a      	str	r2, [r3, #0]
+87800038:	f244 0374 	movw	r3, #16500	; 0x4074
+8780003c:	f2c0 230c 	movt	r3, #524	; 0x20c
+87800040:	f04f 32ff 	mov.w	r2, #4294967295	; 0xffffffff
+87800044:	601a      	str	r2, [r3, #0]
+87800046:	f244 0378 	movw	r3, #16504	; 0x4078
+8780004a:	f2c0 230c 	movt	r3, #524	; 0x20c
+8780004e:	f04f 32ff 	mov.w	r2, #4294967295	; 0xffffffff
+87800052:	601a      	str	r2, [r3, #0]
+87800054:	f244 037c 	movw	r3, #16508	; 0x407c
+87800058:	f2c0 230c 	movt	r3, #524	; 0x20c
+8780005c:	f04f 32ff 	mov.w	r2, #4294967295	; 0xffffffff
+87800060:	601a      	str	r2, [r3, #0]
+87800062:	f44f 4381 	mov.w	r3, #16512	; 0x4080
+87800066:	f2c0 230c 	movt	r3, #524	; 0x20c
+8780006a:	f04f 32ff 	mov.w	r2, #4294967295	; 0xffffffff
+8780006e:	601a      	str	r2, [r3, #0]
+87800070:	46bd      	mov	sp, r7
+87800072:	f85d 7b04 	ldr.w	r7, [sp], #4
+87800076:	4770      	bx	lr
+
+87800078 <led_init>:
+87800078:	b480      	push	{r7}
+8780007a:	af00      	add	r7, sp, #0
+8780007c:	2368      	movs	r3, #104	; 0x68
+8780007e:	f2c0 230e 	movt	r3, #526	; 0x20e
+87800082:	2205      	movs	r2, #5
+87800084:	601a      	str	r2, [r3, #0]
+87800086:	f44f 733d 	mov.w	r3, #756	; 0x2f4
+8780008a:	f2c0 230e 	movt	r3, #526	; 0x20e
+8780008e:	f44f 5284 	mov.w	r2, #4224	; 0x1080
+87800092:	601a      	str	r2, [r3, #0]
+87800094:	f24c 0304 	movw	r3, #49156	; 0xc004
+87800098:	f2c0 2309 	movt	r3, #521	; 0x209
+8780009c:	2208      	movs	r2, #8
+8780009e:	601a      	str	r2, [r3, #0]
+878000a0:	f44f 4340 	mov.w	r3, #49152	; 0xc000
+878000a4:	f2c0 2309 	movt	r3, #521	; 0x209
+878000a8:	2200      	movs	r2, #0
+878000aa:	601a      	str	r2, [r3, #0]
+878000ac:	46bd      	mov	sp, r7
+878000ae:	f85d 7b04 	ldr.w	r7, [sp], #4
+878000b2:	4770      	bx	lr
+
+878000b4 <main>:
+878000b4:	b580      	push	{r7, lr}
+878000b6:	af00      	add	r7, sp, #0
+878000b8:	f7ff ffae 	bl	87800018 <clk_enable>
+878000bc:	f7ff ffdc 	bl	87800078 <led_init>
+878000c0:	e7fe      	b.n	878000c0 <main+0xc>
+878000c2:	bf00      	nop
+878000c4:	0000      	movs	r0, r0
+	...
+
+878000c8 <__main_from_arm>:
+878000c8:	e51ff004 	ldr	pc, [pc, #-4]	; 878000cc <__main_from_arm+0x4>
+878000cc:	878000b5 			; <UNDEFINED> instruction: 0x878000b5
+
+Disassembly of section .comment:
+
+00000000 <.comment>:
+   0:	3a434347 	bcc	10d0d24 <_start-0x8672f2dc>
+   4:	694c2820 	stmdbvs	ip, {r5, fp, sp}^
+   8:	6f72616e 	svcvs	0x0072616e
+   c:	43434720 	movtmi	r4, #14112	; 0x3720
+  10:	392e3420 	stmdbcc	lr!, {r5, sl, ip, sp}
+  14:	3130322d 	teqcc	r0, sp, lsr #4
+  18:	31302e37 	teqcc	r0, r7, lsr lr
+  1c:	2e342029 	cdpcs	0, 3, cr2, cr4, cr9, {1}
+  20:	00342e39 	eorseq	r2, r4, r9, lsr lr
+
+Disassembly of section .ARM.attributes:
+
+00000000 <.ARM.attributes>:
+   0:	00003041 	andeq	r3, r0, r1, asr #32
+   4:	61656100 	cmnvs	r5, r0, lsl #2
+   8:	01006962 	tsteq	r0, r2, ror #18
+   c:	00000026 	andeq	r0, r0, r6, lsr #32
+  10:	412d3705 	teqmi	sp, r5, lsl #14
+  14:	070a0600 	streq	r0, [sl, -r0, lsl #12]
+  18:	09010841 	stmdbeq	r1, {r0, r6, fp}
+  1c:	12040a02 	andne	r0, r4, #8192	; 0x2000
+  20:	15011404 	strne	r1, [r1, #-1028]	; 0x404
+  24:	18031701 	stmdane	r3, {r0, r8, r9, sl, ip}
+  28:	1b021a01 	blne	86834 <_start-0x877797cc>
+  2c:	22011c03 	andcs	r1, r1, #768	; 0x300
+  30:	Address 0x0000000000000030 is out of bounds.
+
